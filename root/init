@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+startcommand="google-chrome \
+    --no-sandbox \
+    --no-first-run \
+    --user-data-dir=/config/profile"
+
+xpra start \
+    --start="${startcommand}" \
+    --bind-tcp=0.0.0.0:3000 \
+    --daemon=no \
+    --resize-display=yes \
+    --desktop-scaling=auto \
+    --encoding=h264

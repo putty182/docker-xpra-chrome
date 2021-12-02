@@ -1,6 +1,6 @@
 FROM ubuntu:focal
 ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Australia/Brisbane
+ENV TZ=Etc/UTC
 
 ## xpra
 RUN \
@@ -51,5 +51,5 @@ VOLUME /config
 
 USER chrome
 WORKDIR /config
-ENTRYPOINT [ "xpra" ]
-CMD [ "start", "--start=google-chrome --no-sandbox --no-first-run --user-data-dir=/config/profile", "--bind-tcp=0.0.0.0:3000", "--daemon=no", "--resize-display=yes", "--desktop-scaling=auto"]
+COPY /root/ /
+ENTRYPOINT [ "/init" ]

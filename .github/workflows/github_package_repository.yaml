@@ -71,7 +71,7 @@ jobs:
 
       - name: "docker: Push Docker image [main branch]"
         id: docker-publish
-        if: github.ref_name == "main"
+        if: github.ref_name == 'main'
         uses: docker/build-push-action@v2
         with:
           context: .

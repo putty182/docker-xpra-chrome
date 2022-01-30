@@ -13,7 +13,6 @@ on:
   
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push-image:
@@ -51,14 +50,14 @@ jobs:
         with:
           context: .
           push: false
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.docker-meta.outputs.tags }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
       
       - name: "anchore: Scan the Docker Image"
         id: anchore-scan
         uses: anchore/scan-action@v3
         with:
-          image: ${{ steps.meta.outputs.tags }}
+          image: ${{ steps.docker-build.outputs.digest }}
           fail-build: false
           acs-report-enable: true
           severity-cutoff: "critical"
